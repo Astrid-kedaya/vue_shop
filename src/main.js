@@ -9,7 +9,13 @@ import "./assets/css/global.css";
 
 import axios from 'axios'
 // 配置请求的根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://139.9.202.95:8888/api/private/v1'
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  // console.log(config);
+  // 必须return
+  return config
+})
 // 挂载axios
 Vue.prototype.$http = axios
 
